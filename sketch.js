@@ -10,6 +10,8 @@ let r,
   laserSound,
   aliensImg = [],
   starsImg = [],
+  planetsImg = [],
+  planets = [],
   stars = [],
   lasers = [],
   alienLasers = [],
@@ -25,6 +27,9 @@ function preload() {
   }
   for(let i = 0; i < 3; i++) {
 		starsImg[i] = loadImage('assets/sprites/stars/star' + i + '.png');
+	}
+  for(let i = 0; i < 9; i++){
+		planetsImg[i] = loadImage('assets/sprites/planets/planet' + i + '.png');
 	}
 
   laserSound = loadSound('assets/sounds/laser.mp3');
@@ -141,15 +146,26 @@ function damageShooter(laser) {
 }
 
 function createExtras() {
+  //stars
   for(let i = 0; i < 300; i++) {
 		let starImg = random(starsImg);
     let star = new Star(starImg);
 		stars.push(star);
+	}
+
+  //planets
+  for(let i = 0; i < 10; i++){
+		let planetImg = random(planetsImg);
+		let planet = new Planet(planetImg);
+    planets.push(planet);
 	}
 }
 
 function showExtras() {
   for(let i in stars){
     stars[i].show();
+  }
+  for(let i in planets){
+    planets[i].show();
   }
 }

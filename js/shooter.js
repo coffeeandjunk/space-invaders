@@ -44,8 +44,8 @@ class Shooter {
     this.vel.y *= 0.9;
   }
 
-  explode(explosionImg) {
-    image(explosionImg, this.x - this.w / 2, this.y - this.h / 2, this.w * 2, this.h * 2);
+  explode(explosionImg, explosionSound) {
+    image(explosionImg, this.pos.x, this.pos.y, this.w * 2, this.h * 2);
+    if (!explosionSound.isPlaying()) explosionSound.play();
   }
-
 }

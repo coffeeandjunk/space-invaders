@@ -40,9 +40,9 @@ class Laser {
     } else return false;
   }
 
-  hits(alien) {
-    let d = dist(this.pos.x, this.pos.y, alien.pos.x, alien.pos.y);
-    if (d < alien.w) {
+  hits(entity) {
+    let d = dist(this.pos.x, this.pos.y, entity.pos.x, entity.pos.y);
+    if (d < entity.w) {
       return true;
     } else {
       return false;

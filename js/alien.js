@@ -10,7 +10,7 @@ class Alien {
     this.h = this.w;
     this.vel = {
       x: 0,
-      y: random(0.8)
+      y: random(1)
     };
   }
 
@@ -32,26 +32,6 @@ class Alien {
 
   explode(explosionImg, explosionSound) {
     image(explosionImg, this.pos.x, this.pos.y, this.w * 2, this.h * 2);
-    explosionSound.play();
-  }
-
-  hits(shooter) {
-
-    let hits = dist(this.x, this.y, players.x, players.y);
-
-    if (hits < players.w) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  createone() {
-    this.alienImg = random(alienImg);
-    this.x = random(width);
-    this.y = random(-100);
-    this.w = (random(30) + 5);
-    this.h = this.w;
-    this.ys = random(1);
+    if (!explosionSound.isPlaying()) explosionSound.play();
   }
 }

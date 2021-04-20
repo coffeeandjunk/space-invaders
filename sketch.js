@@ -5,6 +5,7 @@ let r,
   alienLaserImg,
   explosionImg,
   explosionSound,
+  shooterExplosionSound,
   alienLaserSound,
   laserSound,
   aliensImg = [],
@@ -23,6 +24,7 @@ function preload() {
 
   laserSound = loadSound('assets/sounds/laser.mp3');
   explosionSound = loadSound('assets/sounds/explosion.wav');
+  shooterExplosionSound = loadSound('assets/sounds/shooter-explosion.mp3');
   alienLaserSound = loadSound('assets/sounds/alien-laser.wav');
 
 }
@@ -43,7 +45,7 @@ function draw() {
   //spawn aliens
   r = random(100);
   if (r < 1) {
-    for (let i = 0; i < random(5); i++) {
+    for (let i = 0; i < random(10); i++) {
       let alienImg = random(aliensImg);
       let x = random(width);
       let y = 0;
@@ -80,7 +82,7 @@ function draw() {
       alienLasers.splice(i, 1);
       i--;
     } else {
-      // damageShooter(i);
+      damageShooter(i);
     }
   }
 
@@ -121,5 +123,12 @@ function alienFire() {
     let laser = new Laser(alienLaserImg, alien.pos.x, alien.pos.y, "alien");
     alienLasers.push(laser);
     laserSound.play();
+  }
+}
+
+function damageShooter(laser) {
+  if (alienLasers[laser].hits(shooter)) {
+    shooter.explode(explosionImg, shooterExplosionSound);
+    // removeLaserAndAlien(j, laser);
   }
 }

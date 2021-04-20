@@ -12,7 +12,7 @@ class Laser {
       this.h = 20;
       this.vel = {
         x: 0,
-        y: 8
+        y: random(4, 8)
       }
     } else {
       this.w = 60;

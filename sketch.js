@@ -9,6 +9,8 @@ let r,
   alienLaserSound,
   laserSound,
   aliensImg = [],
+  starsImg = [],
+  stars = [],
   lasers = [],
   alienLasers = [],
   aliens = []
@@ -21,6 +23,9 @@ function preload() {
   for (let i = 0; i < 7; i++) {
     aliensImg[i] = loadImage('assets/sprites/aliens/alien' + i + '.png');
   }
+  for(let i = 0; i < 3; i++) {
+		starsImg[i] = loadImage('assets/sprites/stars/star' + i + '.png');
+	}
 
   laserSound = loadSound('assets/sounds/laser.mp3');
   explosionSound = loadSound('assets/sounds/explosion.wav');
@@ -31,6 +36,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  createExtras();
   imageMode(CENTER)
 
   // spawn shooter
@@ -41,6 +47,7 @@ function setup() {
 
 function draw() {
   background(0);
+  showExtras();
 
   //spawn aliens
   r = random(100);
@@ -130,5 +137,19 @@ function damageShooter(laser) {
   if (alienLasers[laser].hits(shooter)) {
     shooter.explode(explosionImg, shooterExplosionSound);
     // removeLaserAndAlien(j, laser);
+  }
+}
+
+function createExtras() {
+  for(let i = 0; i < 300; i++) {
+		let starImg = random(starsImg);
+    let star = new Star(starImg);
+		stars.push(star);
+	}
+}
+
+function showExtras() {
+  for(let i in stars){
+    stars[i].show();
   }
 }

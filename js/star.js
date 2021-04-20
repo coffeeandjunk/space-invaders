@@ -21,4 +21,10 @@ class Star {
   move() {
     this.pos.y += this.vel.y;
   }
+
+  isOffScreen() {
+    if (this.pos.x > width || this.pos.x < 0 || this.pos.y > height || this.pos.y < 0) {
+      return true;
+    } else return false;
+  }
 }

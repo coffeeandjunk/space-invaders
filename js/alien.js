@@ -32,6 +32,6 @@ class Alien {
 
   explode(explosionImg, explosionSound) {
     image(explosionImg, this.pos.x, this.pos.y, this.w * 2, this.h * 2);
-    if (!explosionSound.isPlaying()) explosionSound.play();
+    explosionSound.play();
   }
 }

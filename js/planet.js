@@ -3,7 +3,7 @@ class Planet {
     this.img = img;
     this.pos = {
       x: random(width),
-      y: -100
+      y: random(height),
     };
     this.w = random(15);
     this.h = this.w;
@@ -20,6 +20,12 @@ class Planet {
 
   move() {
     this.pos.y += this.vel.y;
+  }
+
+  isOffScreen() {
+    if (this.pos.x > width || this.pos.x < 0 || this.pos.y > height || this.pos.y < 0) {
+      return true;
+    } else return false;
   }
 
   hits(entity) {

@@ -25,12 +25,12 @@ function preload() {
   for (let i = 0; i < 7; i++) {
     aliensImg[i] = loadImage('assets/sprites/aliens/alien' + i + '.png');
   }
-  for(let i = 0; i < 3; i++) {
-		starsImg[i] = loadImage('assets/sprites/stars/star' + i + '.png');
-	}
-  for(let i = 0; i < 9; i++){
-		planetsImg[i] = loadImage('assets/sprites/planets/planet' + i + '.png');
-	}
+  for (let i = 0; i < 3; i++) {
+    starsImg[i] = loadImage('assets/sprites/stars/star' + i + '.png');
+  }
+  for (let i = 0; i < 9; i++) {
+    planetsImg[i] = loadImage('assets/sprites/planets/planet' + i + '.png');
+  }
 
   laserSound = loadSound('assets/sounds/laser.mp3');
   explosionSound = loadSound('assets/sounds/explosion.wav');
@@ -41,8 +41,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  createExtras();
-  imageMode(CENTER)
+  imageMode(CENTER);
 
   // spawn shooter
   let x = width / 2;
@@ -145,27 +144,37 @@ function damageShooter(laser) {
   }
 }
 
-function createExtras() {
-  //stars
-  for(let i = 0; i < 300; i++) {
-		let starImg = random(starsImg);
-    let star = new Star(starImg);
-		stars.push(star);
-	}
-
-  //planets
-  for(let i = 0; i < 10; i++){
-		let planetImg = random(planetsImg);
-		let planet = new Planet(planetImg);
-    planets.push(planet);
-	}
-}
-
 function showExtras() {
-  for(let i in stars){
-    stars[i].show();
+  r = random(100);
+  if (r < 1) {
+    //stars
+    for (let i = 0; i < 100; i++) {
+      let starImg = random(starsImg);
+      let star = new Star(starImg);
+      stars.push(star);
+    }
   }
-  for(let i in planets){
+  if (r < 1) {
+    //planets
+    for (let i = 0; i < 3; i++) {
+      let planetImg = random(planetsImg);
+      let planet = new Planet(planetImg);
+      planets.push(planet);
+    }
+  }
+
+  for (let i in stars) {
+    stars[i].show();
+    if (stars[i].isOffScreen()) {
+      stars.splice(i, 1);
+      i--;
+    }
+  }
+  for (let i in planets) {
     planets[i].show();
+    if (planets[i].isOffScreen()) {
+      planets.splice(i, 1);
+      i--;
+    }
   }
 }

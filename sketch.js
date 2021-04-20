@@ -1,4 +1,4 @@
-let game = true,
+let r,
   shooter,
   shooterImg,
   laserImg,
@@ -41,7 +41,7 @@ function draw() {
   background(0);
 
   //spawn aliens
-  let r = random(100);
+  r = random(100);
   if (r < 1) {
     for (let i = 0; i < random(5); i++) {
       let alienImg = random(aliensImg);
@@ -52,14 +52,17 @@ function draw() {
     }
   }
 
+  //remove offscreen aliens
   for (let i in aliens) {
     aliens[i].spawn();
+    alienFire(aliens);
     if (aliens[i].isOffScreen()) {
       aliens.splice(i, 1);
       i--;
     }
   }
 
+  //show lasers fired
   for (let i in lasers) {
     lasers[i].fire();
     if (lasers[i].isOffScreen()) {
@@ -69,6 +72,18 @@ function draw() {
       killAliens(i);
     }
   }
+
+  //show alien lasers fired
+  for (let i in alienLasers) {
+    alienLasers[i].fire();
+    if (alienLasers[i].isOffScreen()) {
+      alienLasers.splice(i, 1);
+      i--;
+    } else {
+      // damageShooter(i);
+    }
+  }
+
   shooter.spawn();
 }
 
@@ -97,4 +112,14 @@ function killAliens(laser) {
 function removeLaserAndAlien(alien, laser) {
   aliens.splice(alien, 1);
   lasers.splice(laser, 1);
+}
+
+function alienFire() {
+  let r = random(100);
+  if (r < 0.5) {
+    let alien = random(aliens);
+    let laser = new Laser(alienLaserImg, alien.pos.x, alien.pos.y, "alien");
+    alienLasers.push(laser);
+    laserSound.play();
+  }
 }

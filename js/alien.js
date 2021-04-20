@@ -10,7 +10,7 @@ class Alien {
     this.h = this.w;
     this.vel = {
       x: 0,
-      y: random(0.5)
+      y: random(0.8)
     };
   }
 

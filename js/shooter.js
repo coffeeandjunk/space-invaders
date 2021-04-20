@@ -18,7 +18,6 @@ class Shooter {
   spawn() {
     this.pos.x = constrain(this.pos.x, this.w/2, width - this.w/2 );
     this.pos.y = constrain(this.pos.y, height - 200, height - this.w/2);
-    imageMode(CENTER);
     image(this.img, this.pos.x, this.pos.y, this.w, this.h);
     this.move();
   }

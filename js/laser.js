@@ -15,7 +15,6 @@ class Laser {
 	}
 
   fire() {
-    imageMode(CENTER);
     image(this.img, this.pos.x - 20, this.pos.y, this.w, this.h);
     image(this.img, this.pos.x + 20, this.pos.y, this.w, this.h);
     this.move();
@@ -31,16 +30,12 @@ class Laser {
     } else return false;
   }
 
-	hits(enemies){
-		let beamhitsenemies = dist(this.x, this.y, enemies.x, enemies.y);
-		if(beamhitsenemies < enemies.w){
+	hits(alien){
+		let d = dist(this.pos.x, this.pos.y, alien.pos.x, alien.pos.y);
+		if(d < alien.w){
 			return true;
-		}else{
+		} else{
 			return false;
 		}
-	}
-
-	remove(){
-		this.delete = true;
 	}
 }

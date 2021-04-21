@@ -1,15 +1,15 @@
-class Planet {
-  constructor(img) {
+class Element {
+  constructor(img, w, yspd) {
     this.img = img;
     this.pos = {
       x: random(width),
       y: random(height),
     };
-    this.w = random(15);
+    this.w = w;
     this.h = this.w;
     this.vel = {
       x: 0,
-      y: random(1)
+      y: yspd
     };
   }
 

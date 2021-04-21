@@ -12,6 +12,8 @@ let r,
   starsImg = [],
   planetsImg = [],
   planets = [],
+  asteroidsImg = [],
+  asteroids = [],
   stars = [],
   lasers = [],
   alienLasers = [],
@@ -31,6 +33,9 @@ function preload() {
   for (let i = 0; i < 9; i++) {
     planetsImg[i] = loadImage('assets/sprites/planets/planet' + i + '.png');
   }
+  for(let i = 0; i < 5; i++){
+		asteroidsImg[i] = loadImage('assets/sprites/asteroids/asteroid' + i + '.png');
+	}
 
   laserSound = loadSound('assets/sounds/laser.mp3');
   explosionSound = loadSound('assets/sounds/explosion.wav');
@@ -55,12 +60,10 @@ function draw() {
 
   //spawn aliens
   r = random(100);
-  if (r < 1) {
-    for (let i = 0; i < random(10); i++) {
+  if (r < 0.5) {
+    for (let i = 0; i < random(10, 15); i++) {
       let alienImg = random(aliensImg);
-      let x = random(width);
-      let y = 0;
-      alien = new Alien(alienImg, x, y);
+      alien = new Alien(alienImg);
       aliens.push(alien);
     }
   }
@@ -129,7 +132,7 @@ function removeLaserAndAlien(alien, laser) {
 
 function alienFire() {
   let r = random(100);
-  if (r < 0.5) {
+  if (r < 1) {
     let alien = random(aliens);
     let laser = new Laser(alienLaserImg, alien.pos.x, alien.pos.y, "alien");
     alienLasers.push(laser);
@@ -150,30 +153,46 @@ function showExtras() {
     //stars
     for (let i = 0; i < 100; i++) {
       let starImg = random(starsImg);
-      let star = new Star(starImg);
+      let star = new Element(starImg, random(1), random(1));
       stars.push(star);
     }
-  }
-  if (r < 1) {
+
+    //asteroids
+    for (let i = 0; i < 3; i++) {
+      let asteroidImg = random(asteroidsImg);
+      let asteroid = new Element(asteroidImg, random(50), random(1));
+      asteroids.push(asteroid);
+    }
+
     //planets
     for (let i = 0; i < 3; i++) {
       let planetImg = random(planetsImg);
-      let planet = new Planet(planetImg);
+      let planet = new Element(planetImg, random(15), random(1));
       planets.push(planet);
     }
   }
+
 
   for (let i in stars) {
     stars[i].show();
     if (stars[i].isOffScreen()) {
       stars.splice(i, 1);
-      i--;
+      // i--;
     }
   }
+
   for (let i in planets) {
     planets[i].show();
     if (planets[i].isOffScreen()) {
       planets.splice(i, 1);
+      // i--;
+    }
+  }
+
+  for (let i in asteroids) {
+    asteroids[i].show();
+    if (asteroids[i].isOffScreen()) {
+      asteroids.splice(i, 1);
       i--;
     }
   }

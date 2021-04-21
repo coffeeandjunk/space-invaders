@@ -24,16 +24,16 @@ class Shooter {
 
   move() {
     if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
-      this.vel.x = -8;
+      this.vel.x = -10;
     }
     if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
-      this.vel.x = 8, 0;
+      this.vel.x = 10;
     }
     if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
-      this.vel.y = -8;
+      this.vel.y = -10;
     }
     if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
-      this.vel.y = 8;
+      this.vel.y = 10;
     }
     // update position
     this.pos.x += this.vel.x;

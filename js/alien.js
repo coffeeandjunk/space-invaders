@@ -1,12 +1,12 @@
 class Alien {
 
-  constructor(alienImg, x, y) {
+  constructor(alienImg) {
     this.alienImg = alienImg;
     this.pos = {
-      x: x,
-      y: y
+      x: random(width),
+      y: random(height / 6)
     };
-    this.w = random(20, 40);;
+    this.w = random(60, 80);;
     this.h = this.w;
     this.vel = {
       x: 0,
@@ -15,13 +15,15 @@ class Alien {
   }
 
   spawn() {
-    this.pos.x = constrain(this.pos.x, this.w/2, width - this.w/2 );
+    this.pos.x = constrain(this.pos.x, this.w / 2, width - this.w / 2);
     image(this.alienImg, this.pos.x, this.pos.y, this.w, this.h);
     this.move();
   }
 
   move() {
     this.pos.y += this.vel.y;
+    this.pos.x += this.vel.x;
+    this.vel.x += random(-0.1, 0.1);
   }
 
   isOffScreen() {

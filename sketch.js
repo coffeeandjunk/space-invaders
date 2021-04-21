@@ -1,4 +1,5 @@
 let r,
+  bkgdImg,
   shooter,
   shooterImg,
   laserImg,
@@ -20,6 +21,7 @@ let r,
   aliens = []
 
 function preload() {
+  bkgdImg = loadImage('assets/sprites/background.png');
   shooterImg = loadImage('assets/sprites/shooter/redfighter.png');
   laserImg = loadImage('assets/sprites/shooter/laser.png');
   explosionImg = loadImage('assets/sprites/explosion.png');
@@ -33,9 +35,9 @@ function preload() {
   for (let i = 0; i < 9; i++) {
     planetsImg[i] = loadImage('assets/sprites/planets/planet' + i + '.png');
   }
-  for(let i = 0; i < 5; i++){
-		asteroidsImg[i] = loadImage('assets/sprites/asteroids/asteroid' + i + '.png');
-	}
+  for (let i = 0; i < 5; i++) {
+    asteroidsImg[i] = loadImage('assets/sprites/asteroids/asteroid' + i + '.png');
+  }
 
   laserSound = loadSound('assets/sounds/laser.mp3');
   explosionSound = loadSound('assets/sounds/explosion.wav');
@@ -46,7 +48,6 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  imageMode(CENTER);
 
   // spawn shooter
   let x = width / 2;
@@ -56,6 +57,9 @@ function setup() {
 
 function draw() {
   background(0);
+  imageMode(CORNERS);
+  image(bkgdImg, 0, 0, width, height);
+  imageMode(CENTER);
   showExtras();
 
   //spawn aliens

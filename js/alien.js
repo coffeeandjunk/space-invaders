@@ -10,12 +10,11 @@ class Alien {
     this.h = this.w;
     this.vel = {
       x: random(-2, 2),
-      y: random(2)
+      y: random(3)
     };
   }
 
   spawn() {
-    // this.pos.x = constrain(this.pos.x, this.w / 2, width - this.w / 2);
     image(this.alienImg, this.pos.x, this.pos.y, this.w, this.h);
     this.move();
   }
@@ -28,10 +27,10 @@ class Alien {
   }
 
   contain() {
-    if (this.pos.x < this.w) {
+    if (this.pos.x <= this.w) {
       this.pos.x = this.w;
       this.vel.x = -this.vel.x;
-    } else if (this.pos.x > width - this.w) {
+    } else if (this.pos.x >= width - this.w) {
       this.pos.x = width - this.w;
       this.vel.x = -this.vel.x;
     }

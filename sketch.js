@@ -54,7 +54,7 @@ function setup() {
 
   // spawn shooter
   let x = width / 2;
-  let y = height - 40;
+  let y = height - 200;
   shooter = new Shooter(shooterImg, x, y);
 }
 
@@ -86,15 +86,6 @@ function draw() {
   }
 
   //show lasers fired
-  // for (let i in lasers) {
-  //   lasers[i].fire();
-  //   if (lasers[i].isOffScreen()) {
-  //     lasers.splice(i, 1);
-  //     i--;
-  //   } else {
-  //     killAliens(i);
-  //   }
-  // }
   for (let i in lasersLeft) {
     lasersLeft[i].fire();
     lasersRight[i].fire();
@@ -130,11 +121,11 @@ function keyPressed() {
 }
 
 function shootLasers() {
-  let laser = new Laser(laserImg, shooter.pos.x - 20, shooter.pos.y)
+  let laser = new Laser(laserImg, shooter.pos.x - 20, shooter.pos.y, "shooter", -4);
   lasersLeft.push(laser);
-  laser = new Laser(laserImg, shooter.pos.x + 30, shooter.pos.y)
+  laser = new Laser(laserImg, shooter.pos.x + 30, shooter.pos.y,"shooter", 4);
   lasersRight.push(laser);
-  laser = new Laser(laserImg, shooter.pos.x, shooter.pos.y)
+  laser = new Laser(laserImg, shooter.pos.x, shooter.pos.y, "shooter", 0, 120);
   lasersCentre.push(laser);
   laserSound.play();
 }

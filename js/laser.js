@@ -1,7 +1,7 @@
 class Laser {
 
-  constructor(img, x, y, alien) {
-    this.type = alien || "shooter";
+  constructor(img, x, y, type, sx, size) {
+    this.type = type || "shooter";
     this.img = img;
     this.pos = {
       x: x,
@@ -15,33 +15,27 @@ class Laser {
         y: random(10, 15)
       }
     } else {
-      this.w = 60;
-      this.h = 60;
+      this.w = size || 60;
+      this.h = size || 60;
       this.vel = {
-        x: 0,
+        x: sx || 0,
         y: random(-15, -20)
       };
     }
   }
   fire() {
-    image(this.img, this.pos.x, this.pos.y, this.w, this.h);
+    if (this.type == "alien") {
+      image(this.img, this.pos.x - 20, this.pos.y, this.w, this.h);
+      image(this.img, this.pos.x + 20, this.pos.y, this.w, this.h);
+    }
+    else image(this.img, this.pos.x, this.pos.y, this.w, this.h);
     this.move();
   }
-
-  // fire() {
-  //   if (this.type == "alien") image(this.img, this.pos.x, this.pos.y, this.w, this.h);
-  //   else {
-  //     image(this.img, this.pos.x, this.pos.y, this.w * 2, this.h * 2);
-  //     image(this.img, this.pos.x + 30, this.pos.y, this.w, this.h);
-  //     image(this.img, this.pos.x - 30, this.pos.y, this.w, this.h);
-  //   }
-  //   this.move();
-  // }
 
   move() {
     this.pos.y += this.vel.y;
     this.pos.x += this.vel.x;
-    this.vel.x += random(-1, 1);
+    if (this.type == "alien") this.vel.x += random(-1, 1);
   }
 
   isOffScreen() {

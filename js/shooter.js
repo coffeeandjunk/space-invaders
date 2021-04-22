@@ -23,7 +23,7 @@ class Shooter {
   }
 
   move() {
-    let speed = 15;
+    let speed = 20;
     if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
       this.vel.x = -speed;
     }

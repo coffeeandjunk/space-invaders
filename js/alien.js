@@ -4,18 +4,18 @@ class Alien {
     this.alienImg = alienImg;
     this.pos = {
       x: random(width),
-      y: random(height / 6)
+      y: 0
     };
-    this.w = random(60, 80);;
+    this.w = random(30, 60);;
     this.h = this.w;
     this.vel = {
-      x: 0,
-      y: random(1)
+      x: random(-2, 2),
+      y: random(2)
     };
   }
 
   spawn() {
-    this.pos.x = constrain(this.pos.x, this.w / 2, width - this.w / 2);
+    // this.pos.x = constrain(this.pos.x, this.w / 2, width - this.w / 2);
     image(this.alienImg, this.pos.x, this.pos.y, this.w, this.h);
     this.move();
   }
@@ -23,7 +23,18 @@ class Alien {
   move() {
     this.pos.y += this.vel.y;
     this.pos.x += this.vel.x;
-    this.vel.x += random(-0.1, 0.1);
+    this.vel.x += random(-0.5, 0.5);
+    this.contain();
+  }
+
+  contain() {
+    if (this.pos.x < this.w) {
+      this.pos.x = this.w;
+      this.vel.x = -this.vel.x;
+    } else if (this.pos.x > width - this.w) {
+      this.pos.x = width - this.w;
+      this.vel.x = -this.vel.x;
+    }
   }
 
   isOffScreen() {

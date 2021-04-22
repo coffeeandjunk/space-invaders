@@ -1,4 +1,5 @@
 let r,
+  cnv,
   bkgdImg,
   shooter,
   shooterImg,
@@ -47,7 +48,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  cnv = createCanvas(windowWidth, windowHeight);
 
   // spawn shooter
   let x = width / 2;
@@ -64,7 +65,7 @@ function draw() {
 
   //spawn aliens
   r = random(100);
-  if (r < 0.5) {
+  if (r < 1) {
     for (let i = 0; i < random(10, 15); i++) {
       let alienImg = random(aliensImg);
       alien = new Alien(alienImg);
@@ -125,6 +126,14 @@ function killAliens(laser) {
       aliens[j].explode(explosionImg, explosionSound);
       removeLaserAndAlien(j, laser);
       break;
+    } else {
+      for (let i = alienLasers.length - 1; i >= 0; i--) {
+        if (lasers[laser].hits(alienLasers[i])) {
+          // lasers.splice(laser, 1);
+          alienLasers.splice(i, 1);
+          break;
+        }
+      }
     }
   }
 }

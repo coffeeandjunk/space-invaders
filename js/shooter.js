@@ -23,17 +23,18 @@ class Shooter {
   }
 
   move() {
+    let speed = 15;
     if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
-      this.vel.x = -10;
+      this.vel.x = -speed;
     }
     if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
-      this.vel.x = 10;
+      this.vel.x = speed;
     }
     if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
-      this.vel.y = -10;
+      this.vel.y = -speed;
     }
     if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
-      this.vel.y = 10;
+      this.vel.y = speed;
     }
     // update position
     this.pos.x += this.vel.x;

@@ -17,7 +17,9 @@ let r,
   asteroidsImg = [],
   asteroids = [],
   stars = [],
-  lasers = [],
+  lasersLeft = [],
+  lasersRight = [],
+  lasersCentre = [],
   alienLasers = [],
   aliens = []
 
@@ -84,10 +86,23 @@ function draw() {
   }
 
   //show lasers fired
-  for (let i in lasers) {
-    lasers[i].fire();
-    if (lasers[i].isOffScreen()) {
-      lasers.splice(i, 1);
+  // for (let i in lasers) {
+  //   lasers[i].fire();
+  //   if (lasers[i].isOffScreen()) {
+  //     lasers.splice(i, 1);
+  //     i--;
+  //   } else {
+  //     killAliens(i);
+  //   }
+  // }
+  for (let i in lasersLeft) {
+    lasersLeft[i].fire();
+    lasersRight[i].fire();
+    lasersCentre[i].fire();
+    if (lasersLeft[i].isOffScreen() || lasersRight[i].isOffScreen() || lasersCentre[i].isOffScreen()) {
+      lasersLeft.splice(i, 1);
+      lasersRight.splice(i, 1);
+      lasersCentre.splice(i, 1);
       i--;
     } else {
       killAliens(i);
@@ -115,20 +130,24 @@ function keyPressed() {
 }
 
 function shootLasers() {
-  let laser = new Laser(laserImg, shooter.pos.x, shooter.pos.y)
-  lasers.push(laser);
+  let laser = new Laser(laserImg, shooter.pos.x - 20, shooter.pos.y)
+  lasersLeft.push(laser);
+  laser = new Laser(laserImg, shooter.pos.x + 30, shooter.pos.y)
+  lasersRight.push(laser);
+  laser = new Laser(laserImg, shooter.pos.x, shooter.pos.y)
+  lasersCentre.push(laser);
   laserSound.play();
 }
 
 function killAliens(laser) {
   for (let j = aliens.length - 1; j >= 0; j--) {
-    if (lasers[laser].hits(aliens[j])) {
+    if (lasersLeft[laser].hits(aliens[j]) || lasersRight[laser].hits(aliens[j]) || lasersCentre[laser].hits(aliens[j])) {
       aliens[j].explode(explosionImg, explosionSound);
       removeLaserAndAlien(j, laser);
       break;
     } else {
       for (let i = alienLasers.length - 1; i >= 0; i--) {
-        if (lasers[laser].hits(alienLasers[i])) {
+        if (lasersLeft[laser].hits(alienLasers[i]) || lasersRight[laser].hits(alienLasers[i]) || lasersCentre[laser].hits(alienLasers[i])) {
           // lasers.splice(laser, 1);
           alienLasers.splice(i, 1);
           break;
@@ -140,7 +159,7 @@ function killAliens(laser) {
 
 function removeLaserAndAlien(alien, laser) {
   aliens.splice(alien, 1);
-  lasers.splice(laser, 1);
+  // lasers.splice(laser, 1);
 }
 
 function alienFire() {

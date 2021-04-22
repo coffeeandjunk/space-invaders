@@ -23,16 +23,20 @@ class Laser {
       };
     }
   }
-
   fire() {
-    if (this.type == "alien") image(this.img, this.pos.x, this.pos.y, this.w, this.h);
-    else {
-      image(this.img, this.pos.x, this.pos.y, this.w * 2, this.h * 2);
-      image(this.img, this.pos.x + 30, this.pos.y, this.w, this.h);
-      image(this.img, this.pos.x - 30, this.pos.y, this.w, this.h);
-    }
+    image(this.img, this.pos.x, this.pos.y, this.w, this.h);
     this.move();
   }
+
+  // fire() {
+  //   if (this.type == "alien") image(this.img, this.pos.x, this.pos.y, this.w, this.h);
+  //   else {
+  //     image(this.img, this.pos.x, this.pos.y, this.w * 2, this.h * 2);
+  //     image(this.img, this.pos.x + 30, this.pos.y, this.w, this.h);
+  //     image(this.img, this.pos.x - 30, this.pos.y, this.w, this.h);
+  //   }
+  //   this.move();
+  // }
 
   move() {
     this.pos.y += this.vel.y;
